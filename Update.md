@@ -108,7 +108,7 @@
 - 彻底移除了字幕的debug模式
 - 移除了Herobrine
 
-# v1.13
+### v1.13
 - 修复了vsv读取文件后未关闭导致的崩溃bug
 - 修复了使用vsv变速时boost系列和wave失效的bug
 - 添加了lr_slash,o_anycol_slash_new
@@ -120,8 +120,12 @@
 - 修复了imgytime/imgxtime/imgscaleytime会串用到上一张图的数值的问题（现在每张图独立计算）@deepseek
 - 优化了图片绘制性能 @deepseek
 
-# v1.13.1
+### v1.13.1
 - 修复了xoffsetind失效的问题
 - 修复了drawuntil生效条件错误的问题
 - 添加了drawstop，代表距离判定线n msx时隐藏
 - 给两种slash新增了控制收束时间的gimmick：*_close_time
+
+### v1.14
+- 修复了beat崩溃问题
+- 新增自定义mpf功能

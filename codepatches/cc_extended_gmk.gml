@@ -1,4 +1,4 @@
-chartPath=get_chart_path_from_chart(global.ch_load);
+chartPath=get_chart_path_from_chartid(global.ch_load);
 var settings=[
     ["JACKET_MANAGE_MODE", "plaudite"],
     ["ENABLE_DEBUG_INFO", false],

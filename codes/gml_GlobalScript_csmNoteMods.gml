@@ -1,10 +1,12 @@
 //arg0:lane,arg1:time
+function gmlNoteModsX_scale (arg0, arg1, arg2, arg3, arg4)
+    {
+        return (((arg0 - arg1) * (arg4 - arg3)) / (arg2 - arg1)) + arg3;
+    };
+
 function gmlNoteModsX(lane, time, arg2)
 {
-    var scale = function(arg0, arg1, arg2, arg3, arg4)
-    {
-        return (((arg0 - arg1) * (arg4 - arg3)) / (arg2 - time)) + arg3;
-    };
+    
     
     var xpos = 0;
     if (cc.mod_beat != 0)
@@ -21,12 +23,12 @@ function gmlNoteModsX(lane, time, arg2)
             
             if (fBeat < fAccelTime)
             {
-                fAmount = scale(fBeat, 0, fAccelTime, 0, 1);
+                fAmount = gmlNoteModsX_scale(fBeat, 0, fAccelTime, 0, 1);
                 fAmount = fAmount * fAmount;
             }
             else
             {
-                fAmount = scale(fBeat, fAccelTime, fTotalTime, 1, 0);
+                fAmount = gmlNoteModsX_scale(fBeat, fAccelTime, fTotalTime, 1, 0);
                 fAmount = 1 - ((1 - fAmount) * (1 - fAmount));
             }
             

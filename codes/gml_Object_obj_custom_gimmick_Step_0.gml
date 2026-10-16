@@ -1,4 +1,13 @@
 event_inherited();
+// t++;
+// if(t>=10){
+//     var fp=file_text_open_append("log_mpf_runtime.log");
+//     file_text_write_string(fp, string(mpfDebugState("ENCORE", "test")));
+//     file_text_writeln(fp);
+//     file_text_close(fp);
+// }
+
+
 if (!instance_exists(cc))
     exit;
 
