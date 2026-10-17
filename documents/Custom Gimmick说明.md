@@ -326,13 +326,13 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 |      lr_slash_col       |                            调整lr_slash的颜色                            |                                     将hex颜色转为10进制后填入<br>                                     |
 |        lr_slash         |          生成数个位于两侧的slash，颜色由lr_slash_col或val2定义           |     val1指定一次生成几个slash，为\_则按1记；<br> val2指定生成slash的颜色，为\_则使用lr_slash_col      |
 |        lr_slash_close_time         |          控制lr_slash的收束时间，单位秒          |     默认为1      |
-|      lr_sides_blue      |                    从两侧生成蓝色的小slash                     |                                                                                                       |
-|      lr_sides_red       |                    从两侧生成红色的小slash                     |                                                                                                       |
-|    lr_sides_rev_blue    |               从画面外侧向内生成蓝色的小slash                  |                                                                                                       |
-|     lr_sides_rev_red    |               从画面外侧向内生成红色的小slash                  |                                                                                                       |
+|      lr_sides_blue      |                    从两侧生成蓝色的类astellion的sidething    |                                                                                                       |
+|      lr_sides_red       |                    从两侧生成红色的类astellion的sidething    |                                                                                                       |
+|    lr_sides_rev_blue    |               从画面外侧向内生成蓝色的类astellion的sidething  |                                                                                                       |
+|     lr_sides_rev_red    |               从画面外侧向内生成红色的类astellion的sidething  |                                                                                                       |
 |      sc_firework        |          生成一个烟花，从底部升空后爆开            | val1指定上升持续拍数，填\_则按1拍记，0或负数立即爆开；<br> val2指定爆开的Y坐标，为\_时随机取整数20~90 |
 |   sc_firework_color     |              调整之后升空的烟花的颜色              | val1调整升空星星的颜色，val2调整爆开碎片的颜色，为\_则保持当前值；<br> 将hex颜色转为10进制后填入 |
-| chorus_greenleft_overlay | 将轨道覆盖层与note皮肤渐变为allison风格 | val1为起始强度，val2为终止强度，取值范围0~1；<br> 终止值填\_则直接切换为val1；<br> 渐变的时长由duration列控制 |
+| chorus_greenleft_overlay | 将轨道覆盖层与note皮肤变为allison风格 | val1为起始强度，val2为终止强度，取值范围0~1；<br> 终止值填\_则直接切换为val1；<br> 渐变的时长由duration列控制 |
 |      set_resolution     |                调整房间渲染分辨率倍率                | val2为倍率，取整后限制在1~8，填\_按1记；<br> 性能开销为倍率的平方（8倍即64倍像素），谱面结束时自动恢复 |
 
 ## 变速(SV)
