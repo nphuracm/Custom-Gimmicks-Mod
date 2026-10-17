@@ -450,6 +450,11 @@ function InitLrExtras(){
         if (v2!=cc.ORIGINAL_FROM) cc.mod_scfw_burst_col=col_convert(real(v2));
     });
     addExtraMod("chorus_greenleft_overlay");
+    addExtraMod("set_resolution",0,function(start,dur,v1,v2){
+        if (!instance_exists(o_csm_set_resolution)) instance_create_depth(0,0,250,o_csm_set_resolution);
+        var want = (v2==cc.ORIGINAL_FROM) ? 1 : round(real(v2));
+        o_csm_set_resolution.want = max(1,min(8,want));
+    });
     cc.mod_scfw_star_col=16777215;
     cc.mod_scfw_burst_col=16777215;
     if (!instance_exists(o_csm_firework_renderer)) instance_create_depth(0,0,250,o_csm_firework_renderer);
