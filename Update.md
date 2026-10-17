@@ -129,3 +129,8 @@
 ### v1.14
 - 修复了beat崩溃问题
 - 新增自定义mpf功能
+
+### 未发布
+- 添加了lr_sides_blue/lr_sides_red/lr_sides_rev_blue/lr_sides_rev_red
+- 添加了sc_firework和sc_firework_color
+- 添加了chorus_greenleft_overlay
