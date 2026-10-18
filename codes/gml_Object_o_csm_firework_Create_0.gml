@@ -1,0 +1,12 @@
+sprite_index = sp_sc_firework_star;
+image_speed = 0;
+speed = 0;
+depth = 255;
+climb = (v1 == cc.ORIGINAL_FROM) ? 1 : max(0, real(v1));
+launch_beat = BeatFromBPMListAndTime(cc.bpmlist, launch_ms / 1000, cc.chartoffset);
+burst_ms = 1000 * TimeFromBPMListAndBeat(cc.bpmlist, launch_beat + climb, cc.chartoffset);
+if (climb <= 0) burst_ms = launch_ms;
+flight_ms = max(1, burst_ms - launch_ms);
+ystart = 190;
+target_y = (v2 == cc.ORIGINAL_FROM) ? irandom_range(20, 90) : real(v2);
+exploded = false;

@@ -420,6 +420,47 @@ function InitSides(){
     });
 }
 
+function InitLrExtras(){
+    addExtraMod("lr_sides_blue",0,function(){
+        instance_create_depth(150,90,260,o_lorelei_sidething,{dir:1});
+        instance_create_depth(170,90,260,o_lorelei_sidething,{dir:-1});
+    });
+    addExtraMod("lr_sides_red",0,function(){
+        instance_create_depth(150,90,260,o_lorelei_sidething,{dir:1,image_index:1});
+        instance_create_depth(170,90,260,o_lorelei_sidething,{dir:-1,image_index:1});
+    });
+    addExtraMod("lr_sides_rev_blue",0,function(){
+        instance_create_depth(-10,90,260,o_lorelei_sidething,{dir:-1});
+        instance_create_depth(330,90,260,o_lorelei_sidething,{dir:1});
+    });
+    addExtraMod("lr_sides_rev_red",0,function(){
+        instance_create_depth(-10,90,260,o_lorelei_sidething,{dir:-1,image_index:1});
+        instance_create_depth(330,90,260,o_lorelei_sidething,{dir:1,image_index:1});
+    });
+    addExtraMod("sc_firework",0,function(start,dur,v1,v2){
+        instance_create_depth(irandom_range(10,104)+206*irandom_range(0,1),190,255,o_csm_firework,
+        {
+            v1:v1,
+            v2:v2,
+            launch_ms:start
+        });
+    });
+    addExtraMod("sc_firework_color",0,function(start,dur,v1,v2){
+        if (v1!=cc.ORIGINAL_FROM) cc.mod_scfw_star_col=col_convert(real(v1));
+        if (v2!=cc.ORIGINAL_FROM) cc.mod_scfw_burst_col=col_convert(real(v2));
+    });
+    addExtraMod("chorus_greenleft_overlay");
+    addExtraMod("set_resolution",0,function(start,dur,v1,v2){
+        if (!instance_exists(o_csm_set_resolution)) instance_create_depth(0,0,250,o_csm_set_resolution);
+        var want = (v2==cc.ORIGINAL_FROM) ? 1 : round(real(v2));
+        o_csm_set_resolution.want = max(1,min(8,want));
+    });
+    cc.mod_scfw_star_col=16777215;
+    cc.mod_scfw_burst_col=16777215;
+    if (!instance_exists(o_csm_firework_renderer)) instance_create_depth(0,0,250,o_csm_firework_renderer);
+    if (!instance_exists(o_csm_greenleft_skin)) instance_create_depth(0,0,250,o_csm_greenleft_skin);
+}
+
 function InitAngelstarChecker(){
     if(!cc.ENABLE_ANGELSTAR_CHECKER)
         exit;
@@ -651,6 +692,7 @@ InitText();
 InitDistortBG();
 InitNonBaseFX();
 InitSides()
+InitLrExtras();
 InitDFGridAndLine();
 InitAngelstarChecker();
 InitCustomShader();
