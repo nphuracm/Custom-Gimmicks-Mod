@@ -13,178 +13,6 @@ args of callbacks:
 [start, duration, thismod.v1, thismod.v2, thismod.e]
 */
 t=0
-custom_mpfs=[]
-
-funcs={
-    quake: function(arg0)
-    {
-        random_set_seed(floor(arg0 * 32));
-        
-        for (var i = 0; i < 8; i++)
-        {
-            with (proxies[i])
-            {
-                prxd = (random(1) * prvib * 2) - prvib;
-                prxd = (random(1) * prvib * 2) - prvib;
-            }
-        }
-        
-        randomize();
-    },
-    
-    spin3D: function(arg0)
-    {
-        var spinradiusx = cc.mod_spinradiusx;
-        var spinradiusz = cc.mod_spinradiusz;
-        var fakezy = cc.mod_fakezy;
-        var fakezyb = cc.mod_fakezyb;
-        var float = cc.mod_float;
-        
-        for (var i = 0; i < 4; i++)
-        {
-            with (proxies[i])
-            {
-                var ang = 50.26548245743669 + (((arg0 - 180) * pi) / 12);
-                var quadrant = (1.5707963267948966 * i) + pi;
-                var finalang = ((ang - quadrant) % 1.5707963267948966) + quadrant;
-                var xp = cos(finalang);
-                var zp = sin(finalang);
-                prx = (xp * spinradiusx) + (20 * float * sin(finalang * 2));
-                pry = 20 * float * cos(finalang * 2);
-                przm = 1 - (zp * spinradiusz);
-                var fzy = 1;
-                
-                if (((i % 2) == 0 && (arg0 % 12) < 6) || ((i % 2) == 1 && (arg0 % 12) >= 6))
-                    fzy = fakezy;
-                
-                przy = fzy * fakezyb;
-                prrz = 10 * float * sin(finalang * 2);
-            }
-        }
-    },
-    
-    wiggle: function(arg0)
-    {
-        var spinradiusx = cc.mod_spinradiusx;
-        var float = cc.mod_float;
-        var wiggly = cc.mod_wiggly * (0.55 + (0.45 * cos(arg0 * pi * 0.5)));
-        var wigspeed = (arg0 > 380) ? 4 : 3;
-        
-        for (var i = 0; i < 4; i++)
-        {
-            with (proxies[i])
-            {
-                var ang = ((arg0 - 324) * pi * wigspeed) + (1.5707963267948966 * i);
-                var xr = cos(ang);
-                var yr = sin(ang);
-                prxc = (spinradiusx * (-1.5 + (1 * i)) * (0.5 + (0.5 * cos(arg0 * pi * 0.5)))) + (float * (-1.5 + i));
-                prrx = xr * wiggly;
-                prry = yr * wiggly;
-                prrzb = xr * wiggly * 0.25;
-            }
-        }
-    },
-    
-    swirl: function(arg0)
-    {
-        var spinradiusx = cc.mod_spinradiusx;
-        var float = cc.mod_float;
-        
-        for (var i = 0; i < 4; i++)
-        {
-            var ang = 2.0734511513692637 * i;
-            var floatx = float * ((0.8 * sin(ang + (arg0 * pi * 0.25))) + (0.4 * sin(ang + (arg0 * pi * 0.8 * 0.2))));
-            var floaty = float * ((0.6 * cos(ang + (arg0 * pi * 0.18))) + (0.47 * cos(ang + (arg0 * pi * 0.8 * 0.23))));
-            var floatz = float * ((0.4 * sin(ang + (arg0 * pi * 0.13))) + (0.2 * cos(ang + (arg0 * pi * 0.8 * 0.16))));
-            ang = 1.0367255756846319 * (i / 4);
-            var ang2 = 1.0367255756846319 * ((i + 0.5) / 4);
-            var swirlx = spinradiusx * (0.8 * sin(ang + (arg0 * pi * 0.125)));
-            var swirly = spinradiusx * (0.6 * cos(ang + (arg0 * pi * 0.25)));
-            var swirlx2 = spinradiusx * (0.8 * sin(ang2 + (arg0 * pi * 0.125)));
-            var swirly2 = spinradiusx * (0.6 * cos(ang2 + (arg0 * pi * 0.25)));
-            
-            with (proxies[i])
-            {
-                prxc = floatx + swirlx;
-                pryc = floaty + swirly;
-                prrzb = floatz;
-            }
-            
-            with (proxies[i + 4])
-            {
-                prxc = floatx + swirlx2;
-                pryc = floaty + swirly2;
-                prrzb = floatz;
-            }
-        }
-    },
-    spinProxyZero: function(arg0)
-    {
-        with (proxies[0])
-        {
-            var spinradius = cc.mod_spinradius;
-            var xp = 90 * sin((arg0 * pi) / 16);
-            var yp = 60 * cos((arg0 * pi) / 8);
-            prx = xp * spinradius;
-            pry = yp * spinradius;
-            prrz = (yp * spinradius) / 3;
-        }
-    },
-    
-    spinProxyOne: function(arg0)
-    {
-        with (proxies[1])
-        {
-            var spinradius = cc.mod_spinradius;
-            var xp = 90 * sin((arg0 * pi) / 16);
-            var yp = 30 * cos((arg0 * pi) / 8);
-            prxb = xp * spinradius;
-            pryb = yp * spinradius;
-            prrzb = (yp * spinradius) / 3;
-        }
-    },
-    spinProxies: function(arg0)
-    {
-        for (var i = 0; i < 4; i++)
-        {
-            with (proxies[i])
-            {
-                var spinradius = cc.mod_spinradius;
-                var spiny = cc.mod_spiny;
-                var xp = 90 * sin(((arg0 * pi) / 16) + (i * pi * 0.5));
-                var yp = (-90 * spiny) + (90 * cos(((arg0 * pi) / 16) + (i * pi * 0.5)));
-                prx = xp * spinradius;
-                pry = yp * spinradius;
-            }
-        }
-    }
-}
-
-var chart=undefined
-
-if (instance_exists(o_songselect_main)){
-    chart=o_songselect_main.selected_song;
-}
-else if (instance_exists(o_songselect_shatter)){
-    chart=o_songselect_shatter.selected_song;
-}
-else{
-    chart=global.ch_load;
-}
-
-var _mpfPath = get_chart_path_from_chartid(chart);
-var _mpfTable = mpfRegisterAll(variable_global_exists("df_load") ? global.df_load : "", _mpfPath);
-if (_mpfTable != undefined)
-{
-    var _mpfNames = variable_struct_get_names(_mpfTable);
-    for (var _mpfI = 0; _mpfI < array_length(_mpfNames); _mpfI++)
-    {
-        var _mpfKey = _mpfNames[_mpfI];
-        var _mpfFn = variable_struct_get(_mpfTable, _mpfKey);
-        if (!struct_exists(funcs, _mpfKey)) variable_struct_set(funcs, _mpfKey, _mpfFn);
-        array_push(custom_mpfs, _mpfFn);
-    }
-}
 
 if (!instance_exists(cc))
     exit;
@@ -192,8 +20,6 @@ if (!instance_exists(cc))
 depth=50;
 //Initilizers
 function InitSkinChange(){
-    if (!cc.ENABLE_SKIN_CHANGE)
-        exit;
     singleSkins=[
         [sp_note_chip_normal, sp_note_chip_normal, sp_note_hold_normal, sp_note_chip_normal, sp_note_chip_mine_normal],
         [sp_note_chip_stopmotion, sp_note_hold_start_stopmotion, sp_note_hold_stopmotion, sp_note_hold_end_stopmotion, sp_empty],
@@ -205,15 +31,23 @@ function InitSkinChange(){
         [sp_note_bumper_stopmotion, sp_empty, sp_empty],
         [sp_note_bumper_extendnova, sp_note_bumper_timing_normal, sp_note_bumper_mine_normal],
         [sp_note_bumper_stargazers, sp_note_bumper_timing_stargazers, sp_empty]
-
     ]
+    cc.current_sg_skin=singleSkins[0]
+    cc.current_bp_skin=bumperSkins[0]
+    if (!cc.ENABLE_SKIN_CHANGE)
+        exit;
     addExtraMod("changeskin", 0, function(start,dur,v1,skinID){
         for (var lane=0;lane<7;lane++)
         {
             if (lane<4)
-                obj_note_rendering.lane_sprites[lane]=obj_custom_gimmick.singleSkins[skinID]
-            else
-                obj_note_rendering.lane_sprites[lane]=obj_custom_gimmick.bumperSkins[skinID]
+            {
+                obj_note_rendering.lane_sprites[lane]=obj_custom_gimmick.singleSkins[skinID];
+                cc.current_sg_skin=obj_custom_gimmick.singleSkins[skinID];
+            }
+            else{
+                obj_note_rendering.lane_sprites[lane]=obj_custom_gimmick.bumperSkins[skinID];
+                cc.current_bp_skin=obj_custom_gimmick.bumperSkins[skinID];
+            }
         }
     })
 }
@@ -222,7 +56,7 @@ function InitCSMJacket(){
     layer_destroy_instances(layer_get_id("Instances_2"))
     layer_destroy_instances(layer_get_id("Instances_1")) 
     var Lparticle=layer_create(800,"Lparticle")  
-    var LBG=layer_create(700,"LBG")
+    var LBG=layer_create(cc.JACKET_GLOW?700:490,"LBG")
     instance_create_layer(0, 32, Lparticle, o_csm_particle_system)
     instance_create_layer(0, 32, LBG, o_csm_jacket)
     addExtraMod("particle_alpha");
@@ -360,12 +194,16 @@ function InitDFGridAndLine(){
     addExtraMod("df_grid_alpha");
     addExtraMod("df_grid_top");
     addExtraMod("df_grid_bottom");
+    addExtraMod("df_grid_col",0,function(start,dur,v1,v2){
+        cc.mod_df_grid_col=col_convert(v2);
+    });
     cc.mod_df_sideline = 0;
     cc.mod_df_sideline_alpha = 1;
     cc.mod_df_whitebg = 0;
     cc.mod_df_grid_alpha = 0;
     cc.mod_df_grid_top = 0;
     cc.mod_df_grid_bottom = 0;
+    cc.mod_df_grid_col = c_white;
 }
 
 function InitSides(){

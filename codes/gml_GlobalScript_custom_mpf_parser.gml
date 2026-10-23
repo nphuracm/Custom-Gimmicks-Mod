@@ -1327,7 +1327,8 @@ function mpfLoadEnv(_env)
     {
         mpfPushError("NameError", "mpf script not found: " + string(_env.path), 0, "parse", _env.diff, _env.name);
         mpfRecordError(_env, "NameError", "mpf script not found: " + string(_env.path), 0, "parse");
-        _env.dead = true;
+        _env.dead 
+        = true;
         return false;
     }
     var _res = mpfParser(_text, { diff: _env.diff, name: _env.name });

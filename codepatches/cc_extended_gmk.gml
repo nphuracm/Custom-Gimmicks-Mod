@@ -10,7 +10,8 @@ var settings=[
     ["ENABLE_MUSIC_CONTROL", true],
     ["ENABLE_STARPARTICLE",false],
     ["ENABLE_SKIN_CHANGE",false],
-    ["NEW_PRTRX_CALCULATION",false]
+    ["NEW_PRTRX_CALCULATION",false],
+    ["JACKET_GLOW",false]
 ];
 array_foreach(settings, function(ele){
     variable_instance_set(cc, ele[0], ele[1]);

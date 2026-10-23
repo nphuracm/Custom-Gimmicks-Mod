@@ -132,25 +132,140 @@ RegisterWLFuncs("random_set_seed", RISK_LEVEL.SAFE, MPF_SCOPE.ANY, function(x, e
     return random_set_seed(x);
 });
 
-//gameplay
-RegisterWLFuncs("add_judge_cnt", RISK_LEVEL.HIGH_RISK, MPF_SCOPE.ANY, function(judgeType, cnt, env=undefined) {
+//input relative
+RegisterWLFuncs("input_lane_check_pressed",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(lane,env=undefined){
+    return input_lane_check_pressed(lane);
+})
+
+RegisterWLFuncs("input_lane_check_released",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(lane,env=undefined){
+    return input_lane_check_released(lane);
+})
+
+RegisterWLFuncs("input_lane_check",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(lane,env=undefined){
+    return input_lane_check(lane);
+})
+
+RegisterWLFuncs("input_keyboard_check_key",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(itype,kcode,env=undefined){
+    return input_keyboard_check_key(itype,kcode);
+})
+
+RegisterWLFuncs("input_check_mouse",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(itype,mcode,env=undefined){
+    switch (mcode) {
+        case 0:
+            mcode=mb_left;
+            break;
+        case 1:
+            mcode=mb_middle;
+            break;
+        case 2:
+            mcode=mb_right;
+            break;
+        case 3:
+            mcode=mb_any
+            break;
+    }
+    switch (itype) {
+        case 0:
+            return mouse_check_button_pressed(mcode)
+            break;
+        case 1:
+            return mouse_check_button_released(mcode)
+            break;
+        case 2:
+            return mouse_check_button(mcode);
+            break;
+    }
+})
+
+RegisterWLFuncs("mouse_wheel_up",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(env=undefined){
+    return mouse_wheel_up();
+})
+
+RegisterWLFuncs("mouse_wheel_down",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(env=undefined){
+    return mouse_wheel_down();
+})
+
+RegisterWLFuncs("get_mouse_pos",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(env=undefined){
+    return [mouse_x,mouse_y];
+})
+
+//gameplay relative
+RegisterWLFuncs("add_judge_cnt", RISK_LEVEL.HIGH_RISK, MPF_SCOPE.ANY, function(judgeType, cnt, side, env=undefined) {
+    if (is_struct(side)) { env = side; side = 0; }
+    if (!is_real(judgeType) || judgeType != floor(judgeType) || judgeType < 0 || judgeType > 4) mpfRaise("ValueError", "judge type must be an integer 0~4");
+    if (!is_real(cnt) || cnt != floor(cnt)) mpfRaise("ValueError", "judge count must be an integer");
+    if (!is_real(side)) mpfRaise("ValueError", "judge side must be 0 (late) or 1 (early)");
+    if (cnt == 0) return;
+    if (!variable_global_exists("count_acrit")) return;
+
+    var _early = (side != 0);
+    var _accval = 0;
+    var _xaccval = 0;
     switch (judgeType) {
         case 0:
             global.count_acrit += cnt;
+            _accval = 100;
+            _xaccval = 101 / 1.01;
             break;
         case 1:
-            global.count_crit += cnt;
+            if (_early) global.count_early_crit += cnt;
+            else global.count_late_crit += cnt;
+            _accval = 100;
+            _xaccval = 100 / 1.01;
             break;
         case 2:
-            global.count_great += cnt;
+            if (_early) global.count_early_great += cnt;
+            else global.count_late_great += cnt;
+            _accval = 75;
+            _xaccval = 75 / 1.01;
             break;
         case 3:
-            global.count_good += cnt;
+            if (_early) global.count_early_good += cnt;
+            else global.count_late_good += cnt;
+            _accval = 50;
+            _xaccval = 50 / 1.01;
             break;
         case 4:
-            global.count_miss += cnt;
+            if (_early) global.count_early_miss += cnt;
+            else global.count_late_miss += cnt;
             break;
     }
+
+    global.count_crit = global.count_early_crit + global.count_late_crit;
+    global.count_great = global.count_early_great + global.count_late_great;
+    global.count_good = global.count_early_good + global.count_late_good;
+    global.count_miss = global.count_early_miss + global.count_late_miss;
+    global.earlynotes = global.count_early_crit + global.count_early_great + global.count_early_good;
+    global.latenotes = global.count_late_crit + global.count_late_great + global.count_late_good;
+
+    if (judgeType == 4) {
+        global.currentcombo = (cnt > 0) ? 0 : max(0, global.currentcombo - cnt);
+    }
+    else if (judgeType != 3) {
+        global.currentcombo = max(0, global.currentcombo + cnt);
+    }
+    global.maxcombo = max(global.maxcombo, global.currentcombo);
+
+    var _acc = global.accuracy;
+    _acc.sum += _accval * cnt;
+    _acc.count += cnt;
+    _acc.value = (_acc.count > 0) ? (_acc.sum / _acc.count) : 100;
+    var _xacc = global.x_accuracy;
+    _xacc.sum += _xaccval * cnt;
+    _xacc.count += cnt;
+    _xacc.value = (_xacc.count > 0) ? (_xacc.sum / _xacc.count) : 100;
+
+    if (!variable_global_exists("notevalue")) return;
+    global.currentscore = ((global.count_acrit * 1.01) + global.count_crit + (global.count_great * 0.75) + (global.count_good * 0.5)) * global.notevalue;
+    global.minusscore = 1010000 - (((global.count_crit * 0.01) + (global.count_great * 0.26) + (global.count_good * 0.51) + (global.count_miss * 1.01)) * global.notevalue);
+    global.gamescore = (3 * global.count_acrit) + (2 * global.count_crit) + global.count_great;
+
+    if (!instance_exists(cc)) return;
+    if (cc.sdisp_accscore > global.currentscore) cc.sdisp_accscore = global.currentscore;
+    if (cc.sdisp_exscore > global.gamescore) cc.sdisp_exscore = global.gamescore;
+    cc.pace_total += _accval * cnt;
+    cc.pace_amount += cnt;
+    if (cc.pace_amount > 0) cc.pace_update();
 });
 
 RegisterWLFuncs("get_judge_cnt", RISK_LEVEL.SAFE, MPF_SCOPE.ANY, function(judgeType, env=undefined) {
@@ -174,12 +289,20 @@ RegisterWLFuncs("get_judge_cnt", RISK_LEVEL.SAFE, MPF_SCOPE.ANY, function(judgeT
     return 0;
 });
 
-RegisterWLFuncs("get_combo",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(){
+RegisterWLFuncs("get_combo",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(env=undefined){
     return global.currentcombo;
 })
 
-RegisterWLFuncs("get_max_combo",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(){
+RegisterWLFuncs("get_max_combo",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(env=undefined){
     return global.maxcombo;
+})
+
+RegisterWLFuncs("get_score",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(minus,env=undefined){
+    return minus?global.minusscore:global.currentscore;
+})
+
+RegisterWLFuncs("get_score_ex",RISK_LEVEL.SAFE,MPF_SCOPE.ANY,function(env=undefined){
+    return global.gamescore;
 })
 
 RegisterWLFuncs("set_judge_timing",RISK_LEVEL.HIGH_RISK,MPF_SCOPE.ANY,function(judge,timing){
@@ -190,7 +313,7 @@ RegisterWLFuncs("reset_judge_timing",RISK_LEVEL.HIGH_RISK,MPF_SCOPE.ANY,function
     cc.timings=[35, 70, 110, 150, 200];
 })
 
-//gimmick
+//gimmick control
 RegisterWLFuncs("register_mod", RISK_LEVEL.SAFE, MPF_SCOPE.INIT, function(mod_name,_default_val, env=undefined) {
     if (env == undefined || !is_struct(env) || env.inst == undefined) return;
     var _gmk = env.inst;
@@ -307,5 +430,20 @@ RegisterWLFuncs("ease", RISK_LEVEL.SAFE, MPF_SCOPE.ANY, function(easing,start_va
     return easeFunc(t,start_val,changed,1);
 });
 
+//special
+RegisterWLFuncs("get_game_var_global", RISK_LEVEL.RISK, MPF_SCOPE.ANY, function(var_name, env=undefined) {
+    if (!variable_global_exists(var_name))
+        mpfRaise("ValueError","variable "+string(var_name)+"doesn't exists");
+    return variable_global_get(var_name);
+});
 
-//other
+RegisterWLFuncs("get_game_var_instance", RISK_LEVEL.RISK, MPF_SCOPE.ANY, function(ins_name, var_name,ins_id=0, env=undefined) {
+    var aid=asset_get_index(ins_name)
+    if (aid<=-1)
+        mpfRaise("ValueError","instance "+string(ins_name)+"doesn't exists");
+    var ins=instance_find(aid,ins_id);
+    if (!variable_instance_exists(ins,var_name))
+        mpfRaise("ValueError","variable "+string(var_name)+"doesn't exists");
+
+    return variable_instance_get(ins, var_name);
+});

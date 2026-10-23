@@ -128,10 +128,14 @@
 
 ### v1.14
 - 修复了beat崩溃问题
-- 新增自定义mpf功能
+- 新增自定义mpf功能 @deepseek
 
-### 未发布
-- 添加了lr_sides_blue/lr_sides_red/lr_sides_rev_blue/lr_sides_rev_red
-- 添加了sc_firework和sc_firework_color
-- 添加了chorus_greenleft_overlay
-- 添加了set_resolution，倍率上限8，开销为倍率平方，谱面结束时自动恢复
+### v1.14.1
+- 添加了lr_sides_blue/lr_sides_red/lr_sides_rev_blue/lr_sides_rev_red   @Frollsy
+- 添加了sc_firework和sc_firework_color  @Frollsy
+- 添加了chorus_greenleft_overlay    @Frollsy
+- 添加了set_resolution，倍率上限8，开销为倍率平方，谱面结束时自动恢复   @Frollsy
+- 重写了mpf的add_judge_cnt，现在能给任意判定加减任意整数，并可指定记在early还是late，同时同步分数、准度、连击和pace（原来crit及以下会失效   @Frollsy
+- 新增了JACKET_GLOW，代表要不要修复旧版背景发光的bug
+- 新增输入相关和获取分数的mpf白名单函数
+- 修复并完善了add_judge_cnt

@@ -16,9 +16,9 @@ release = function()
 restore = function()
 {
     for (var i = 0; i < 4; i++)
-        obj_note_rendering.lane_sprites[i] = [sp_note_chip_normal, sp_note_chip_normal, sp_note_hold_normal, sp_note_chip_normal, sp_note_chip_mine_normal];
+        obj_note_rendering.lane_sprites[i] = cc.current_sg_skin;
     for (var i = 4; i < 7; i++)
-        obj_note_rendering.lane_sprites[i] = [sp_note_bumper_normal, sp_note_bumper_timing_normal, sp_note_bumper_mine_normal];
+        obj_note_rendering.lane_sprites[i] = cc.current_bp_skin;
 };
 
 bake = function(a)
