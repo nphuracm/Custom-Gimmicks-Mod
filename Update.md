@@ -135,7 +135,16 @@
 - 添加了sc_firework和sc_firework_color  @Frollsy
 - 添加了chorus_greenleft_overlay    @Frollsy
 - 添加了set_resolution，倍率上限8，开销为倍率平方，谱面结束时自动恢复   @Frollsy
-- 重写了mpf的add_judge_cnt，现在能给任意判定加减任意整数，并可指定记在early还是late，同时同步分数、准度、连击和pace（原来crit及以下会失效   @Frollsy
+- 重写了mpf的add_judge_cnt，现在能给任意判定加减任意整数，并可指定记在early还是late，同时同步分数、准度、连击和pace（原来crit及以下会失效  
 - 新增了JACKET_GLOW，代表要不要修复旧版背景发光的bug
 - 新增输入相关和获取分数的mpf白名单函数
-- 修复并完善了add_judge_cnt
+- 现在自定义mpf是全局的了（任意obj可用）
+
+### v1.14.2
+- 修复了mpf重开一局后，变量不重置的问题
+- 现在新增vsmpf支持热加载了
+- 修复了旧版字幕颜色相关的崩溃
+- 完善cgmk文档
+- mpf函数get_game_var_instance的ins_id参数改为必须项
+- mpf现在支持struct处理（暂时没有相关运算符）
+- 取消了mpf函数array_push的返回值

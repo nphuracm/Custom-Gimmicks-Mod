@@ -169,7 +169,8 @@ function mpfRegisterAll(_difficulty, _chartPath)
     var _path = mpfNormalizeDir(_chartPath);
     if (_path == "") return global.mpfRegistry;
     var _currentDiff = variable_global_exists("df_load") ? global.df_load : "";
-    var _key = _path + "|" + string(_currentDiff);
+    var _runId = instance_exists(cc) ? cc.id : -1;
+    var _key = _path + "|" + string(_currentDiff) + "|" + string(_runId);
     if (global.mpfRegistryKey == _key) return global.mpfRegistry;
     global.mpfRegistryKey = _key;
     global.mpfRegistry = {};

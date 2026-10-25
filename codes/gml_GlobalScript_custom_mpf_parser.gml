@@ -918,6 +918,7 @@ function mpfMakeEnv(_diff, _name, _path, _meta)
         last_err_line: 0,
         last_err_phase: "",
         inst: undefined,
+        cc_id: -1,
         log_fp: undefined
     };
     mpfInitBuiltinVars(_env);
@@ -1390,13 +1391,23 @@ function mpfRunner(currentbeat,obj_ins,entry = undefined){
 
 function mpfRunEntry(_entry, _env, _currentbeat, _obj_ins)
 {
-    if (!variable_struct_exists(_entry, "in_range") || !_entry.in_range)
+    if (!is_struct(_env) || !variable_struct_exists(_env, "__mpf")) return;
+    var _newRun = false;
+    if (instance_exists(cc))
+    {
+        if (_env.cc_id != cc.id)
+        {
+            _newRun = (_env.cc_id != -1);
+            _env.cc_id = cc.id;
+        }
+    }
+    if (!variable_struct_exists(_entry, "in_range") || !_entry.in_range || _newRun)
     {
         _entry.in_range = true;
         _env.dead = false;
         var _refresh = true;
         if (variable_struct_exists(_env, "meta") && is_struct(_env.meta)) _refresh = _env.meta.refresh_on_each_run;
-        if (_refresh) mpfResetEnv(_env);
+        if (_refresh || _newRun) mpfResetEnv(_env);
     }
     mpfRun(_env, _currentbeat, _obj_ins, _entry);
 }

@@ -448,7 +448,6 @@ function InitMisc(){
     addExtraMod("cover3");
 
     addExtraMod("rainbow");
-    addExtraMod("sides");
     addExtraMod("scorealph");
     addExtraMod("bgalph");
     addExtraMod("static");

@@ -7,6 +7,9 @@
 - 方括号括起来代表一个部分的值是必填的，比如```[arg]```代表arg的值是必填的；使用花括号括起来的代表一个部分（的值）是可选的，如```{,{step}}```代表step的值和它前面的那个逗号都是可以省略不写的
 - 在没标注全局gimmick的情况下，本文档提到的gimmick得在obj为```obj_custom_gimmick```时才能使用
 
+## 回调型gimmick与补间型gimmick
+一般的，补间型gimmick的val1代表起始值，val2是结束值，然后再dur期间内从val1按指定缓动过渡val2；但是对于回调型gimmick，缓动、dur、val1和val2各自的意思完全取决于gimmick内部的设计，这也是为什么部分gimmick会有dur为0也能看到很明显的效果，或是调v1没有任何效果的情况。本文档内，对于回调型gimmick会标记上*回调型gimmick*。
+
 ## cgmk配置文件
 顾名思义，这个文件是用来管理要不要启用某一部分的gimmick的。
 
@@ -204,7 +207,7 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 |         gmk名         |                            作用                            |                             其它描述                              |
 | :-------------------: | :--------------------------------------------------------: | :---------------------------------------------------------------: |
 |        fx_red         | 效果与fx_colorise相同，默认为红色，且只能由recolor改变颜色 |                    默认为0，大于等于1代表启用                     |
-|        recolor        |                    随机调整fx_red的颜色                    |                       大于等于1代表触发一次                       |
+|        recolor        |                    随机调整fx_red的颜色                    |             大于等于1代表触发一次<br>*回调型gimmick*              |
 |   fx_red_intensity    |                    调整fx_red的滤镜强度                    |                              默认为1                              |
 |  fx_colorise_col_rgb  |                   调整colorise滤镜的颜色                   |                     将hex颜色转为10进制后填入                     |
 | fx_colorise_col_alpha |             调整colorise滤镜的颜色中的alpha值              |                                                                   |
@@ -249,21 +252,21 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 |        fx_zoom        |                     缩放的动态模糊效果                     |                              默认为0                              |
 
 ## 粒子相关
-|        gmk名        |               作用               |                                                               其它描述                                                               |
-| :-----------------: | :------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------: |
-|  starspawner_timer  |           控制星星数量           |                                                                                                                                      |
-| starspd_multiplier  |         星星下落速度倍率         |                                                                                                                                      |
-|     starspd_low     |         星星最慢下落速度         |                                                                                                                                      |
-|    starspd_high     |         星星最快下落速度         |                                                                                                                                      |
-|  active_starchgcol  |         启用渐变色型星星         |                                              按hsv进行渐变，方式是对h，s和v各自单独补间                                              |
-|  active_startrans   |          启用蒙版型星星          |                                                     星星所在区域黑色底板是透明的                                                     |
-|   startrans_alpha   |        蒙版型星星不透明度        |                                                                                                                                      |
-|  starchgcol_alpha   |       渐变色型星星不透明度       |                                                                                                                                      |
-|  starchgcol_up_rgb  | 渐变色型星星在屏幕上半部分的颜色 |                                                   将hex颜色转为十进制后填入，下同                                                    |
-| starchgcol_down_rgb | 渐变色型星星在屏幕下半部分的颜色 |                                                                                                                                      |
-|   particle_alpha    |      控制菱形粒子的不透明度      |                                                                                                                                      |
-|       rainbow       |        让菱形粒子变为彩色        |                                                                                                                                      |
-|   plaudite_pburst   |          从顶部喷射粒子          | value1控制喷射方式，大于0代表按持续时间，持续时间内每帧喷射一次；否则是喷射一次，但可控制密度；<br>value2代表持续时间（ms）/喷射密度 |
+|        gmk名        |               作用               |                                                                        其它描述                                                                         |
+| :-----------------: | :------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  starspawner_timer  |           控制星星数量           |                                                                                                                                                         |
+| starspd_multiplier  |         星星下落速度倍率         |                                                                                                                                                         |
+|     starspd_low     |         星星最慢下落速度         |                                                                                                                                                         |
+|    starspd_high     |         星星最快下落速度         |                                                                                                                                                         |
+|  active_starchgcol  |         启用渐变色型星星         |                                              按hsv进行渐变，方式是对h，s和v各自单独补间<br>*回调型gimmick*                                              |
+|  active_startrans   |          启用蒙版型星星          |                                                     星星所在区域黑色底板是透明的<br>*回调型gimmick*                                                     |
+|   startrans_alpha   |        蒙版型星星不透明度        |                                                                                                                                                         |
+|  starchgcol_alpha   |       渐变色型星星不透明度       |                                                                                                                                                         |
+|  starchgcol_up_rgb  | 渐变色型星星在屏幕上半部分的颜色 |                                                             将hex颜色转为十进制后填入，下同                                                             |
+| starchgcol_down_rgb | 渐变色型星星在屏幕下半部分的颜色 |                                                                                                                                                         |
+|   particle_alpha    |      控制菱形粒子的不透明度      |                                                                                                                                                         |
+|       rainbow       |        让菱形粒子变为彩色        |                                                                                                                                                         |
+|   plaudite_pburst   |          从顶部喷射粒子          | value1控制喷射方式，大于0代表按持续时间，持续时间内每帧喷射一次；否则是喷射一次，但可控制密度；<br>value2代表持续时间（ms）/喷射密度<br>*回调型gimmick* |
 
 ## 轨道Gimmick
 | gmk名 |                作用                |                                    其它描述                                    |
@@ -292,49 +295,53 @@ animated,[图像名],[源图像路径],[图像层级],[图像帧个数]{,{图像
 > 某一轨的最终yoffset=yoffset+yoffsetb+yoffsetind[lane]；最终xoffset=xoffset+xoffsetb+xoffsetind[lane]
 
 ## 其它
-|          gmk名           |                                   作用                                   |                                                   其它描述                                                    |
-| :----------------------: | :----------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|       jumpto_beat        |                             跳转谱面指定位置                             |                              在value2处填具体的值，单位为拍数<br>*是全局gimmick*                              |
-|         jumpto_s         |                             跳转谱面指定位置                             |                    当value1>0时单位为秒否则为毫秒，在value2处填具体的值<br>*是全局gimmick*                    |
-|        playspeed         |                             设置谱面播放速度                             |                                         默认值为1<br>*是全局gimmick*                                          |
-|      col_convertion      |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  |   *已于1.12.8移除*<br>不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出    |
-|          cover1          |                           调整屏幕遮盖不透明度                           |                             虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                             |
-|          cover2          |                          轨道外侧遮盖的不透明度                          |                                                                                                               |
-|          cover3          |                            轨道遮盖的不透明度                            |                                                                                                               |
-|  angelstar_checker_mode  | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                                    默认为0                                                    |
-| angelstar_checker_alpha  |                          调整棋盘效果的不透明度                          |                                                                                                               |
-|  angelstar_checker_set   |                               刷新棋盘效果                               |                                                                                                               |
-|          wflash          |                            白色闪屏的不透明度                            |                                                                                                               |
-|          static          |                         调整雪花屏效果的不透明度                         |                                                                                                               |
-|       df_sideline2       |                生成一对向外移动的黑色竖线，缓动为outCirc                 |                                                                                                               |
-|       df_sideline        |                      绘制一对可以控制移动的白色竖线                      |                                   范围[0,1]，1代表抵达屏幕边缘，0为轨道边缘                                   |
-|    df_sideline_alpha     |                         控制df_sideline的透明度                          |                                                                                                               |
-|        df_whitebg        |                                 白色背景                                 |                                                                                                               |
-|      df_grid_alpha       |                          df中的网格效果不透明度                          |                                                                                                               |
-|       df_grid_top        |                        控制网格可视部分的顶部位置                        |                                                                                                               |
-|      df_grid_bottom      |                        控制网格可视部分的底部位置                        |                                                                                                               |
-|          bgalph          |                        控制轨道非灰色部分的透明度                        |                                                                                                               |
-|     holdoverlayalpha     |                           轨道灰色部分的透明度                           |                                                                                                               |
-|        hide_combo        |                              隐藏combo显示                               |                                                                                                               |
-|        changeskin        |                             修改当前显示皮肤                             |             取值范围为整数[0,3]<br>0~3分别代表正常，stopmotion，纯黑(entendnova)以及stargazer皮肤             |
-|   unraveling_sidething   |                      生成unraveling stasis的冲击波                       |                                                                                                               |
-|   astellion_sidething    |                          生成astellion的冲击波                           |                                                                                                               |
-|   apocalypse_sidething   |                       生成apocalypse call的冲击波                        |                                                                                                               |
-|      set_slash_col       |                          调整slash_anycol的颜色                          |                                         将hex颜色转为10进制后填入<br>                                         |
-|       slash_anycol       |                 生成横向的slash，颜色由set_slash_col定义                 |                                                                                                               |
-|     slash_anycol_new     |            生成数个横向的slash，颜色由set_slash_col或val2定义            |     val1不为\_时指定一次生成几个slash，填\_则按1记；<br> val2指定生成slash的颜色，为\_时使用set_slash_col     |
-| slash_anycol_close_time  |                    控制slash_anycol的收束时间，单位秒                    |                                                    默认为1                                                    |
-|       lr_slash_col       |                            调整lr_slash的颜色                            |                                         将hex颜色转为10进制后填入<br>                                         |
-|         lr_slash         |          生成数个位于两侧的slash，颜色由lr_slash_col或val2定义           |         val1指定一次生成几个slash，为\_则按1记；<br> val2指定生成slash的颜色，为\_则使用lr_slash_col          |
-|   lr_slash_close_time    |                      控制lr_slash的收束时间，单位秒                      |                                                    默认为1                                                    |
-|      lr_sides_blue       |                  从两侧生成蓝色的类astellion的sidething                  |                                                                                                               |
-|       lr_sides_red       |                  从两侧生成红色的类astellion的sidething                  |                                                                                                               |
-|    lr_sides_rev_blue     |              从画面外侧向内生成蓝色的类astellion的sidething              |                                                                                                               |
-|     lr_sides_rev_red     |              从画面外侧向内生成红色的类astellion的sidething              |                                                                                                               |
-|       sc_firework        |                      生成一个烟花，从底部升空后爆开                      |     val1指定上升持续拍数，填\_则按1拍记，0或负数立即爆开；<br> val2指定爆开的Y坐标，为\_时随机取整数20~90     |
-|    sc_firework_color     |                         调整之后升空的烟花的颜色                         |       val1调整升空星星的颜色，val2调整爆开碎片的颜色，为\_则保持当前值；<br> 将hex颜色转为10进制后填入        |
-| chorus_greenleft_overlay |                  将轨道覆盖层与note皮肤变为allison风格                   | val1为起始强度，val2为终止强度，取值范围0~1；<br> 终止值填\_则直接切换为val1；<br> 渐变的时长由duration列控制 |
-|      set_resolution      |                          调整房间渲染分辨率倍率                          |    val2为倍率，取整后限制在1~8，填\_按1记；<br> 性能开销为倍率的平方（8倍即64倍像素），谱面结束时自动恢复     |
+|          gmk名           |                                   作用                                   |                                                         其它描述                                                          |
+| :----------------------: | :----------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: |
+|       jumpto_beat        |                             跳转谱面指定位置                             |                                    在value2处填具体的值，单位为拍数<br>*是全局gimmick*                                    |
+|         jumpto_s         |                             跳转谱面指定位置                             |                          当value1>0时单位为秒否则为毫秒，在value2处填具体的值<br>*是全局gimmick*                          |
+|        playspeed         |                             设置谱面播放速度                             |                                               默认值为1<br>*是全局gimmick*                                                |
+|      col_convertion      |                  将自定义gmk内部分调整颜色的gmk逻辑转换                  |         *已于1.12.8移除*<br>不为0时会将输入的颜色以rgb的形式使用，否则以bgr的形式<br>受该gmk影响的将在描述中标出          |
+|          cover1          |                           调整屏幕遮盖不透明度                           |                                   虽然不是新的gmk，但是作用变了：控制的是整个屏幕的遮盖                                   |
+|          cover2          |                          轨道外侧遮盖的不透明度                          |                                                                                                                           |
+|          cover3          |                            轨道遮盖的不透明度                            |                                                                                                                           |
+|  angelstar_checker_mode  | 调整angelstar_checker的状态，0为受曲绘影响，1是不受影响，2是大于轨道图层 |                                                          默认为0                                                          |
+| angelstar_checker_alpha  |                          调整棋盘效果的不透明度                          |                                                                                                                           |
+|  angelstar_checker_set   |                               刷新棋盘效果                               |                                                                                                                           |
+|          wflash          |                            白色闪屏的不透明度                            |                                                                                                                           |
+|          static          |                         调整雪花屏效果的不透明度                         |                                                                                                                           |
+|       df_sideline2       |                生成一对向外移动的黑色竖线，缓动为outCirc                 |                                                      *回调型gimmick*                                                      |
+|       df_sideline        |                      绘制一对可以控制移动的白色竖线                      |                                         范围[0,1]，1代表抵达屏幕边缘，0为轨道边缘                                         |
+|    df_sideline_alpha     |                         控制df_sideline的透明度                          |                                                                                                                           |
+|        df_whitebg        |                                 白色背景                                 |                                                                                                                           |
+|      df_grid_alpha       |                          df中的网格效果不透明度                          |                                                                                                                           |
+|       df_grid_top        |                        控制网格可视部分的顶部位置                        |                                                                                                                           |
+|      df_grid_bottom      |                        控制网格可视部分的底部位置                        |                                                                                                                           |
+|       df_grid_col        |                              控制网格的颜色                              |                                                                                                                           |
+|          bgalph          |                        控制轨道非灰色部分的透明度                        |                                                                                                                           |
+|     holdoverlayalpha     |                           轨道灰色部分的透明度                           |                                                                                                                           |
+|        hide_combo        |                              隐藏combo显示                               |                                                                                                                           |
+|        changeskin        |                             修改当前显示皮肤                             |         取值范围为整数[0,3]<br>0~3分别代表正常，stopmotion，纯黑(entendnova)以及stargazer皮肤<br>*回调型gimmick*          |
+|   unraveling_sidething   |                      生成unraveling stasis的冲击波                       |                                                      *回调型gimmick*                                                      |
+|   astellion_sidething    |                          生成astellion的冲击波                           |                                                      *回调型gimmick*                                                      |
+|   apocalypse_sidething   |                       生成apocalypse call的冲击波                        |                                                      *回调型gimmick*                                                      |
+|      set_slash_col       |                          调整slash_anycol的颜色                          |                                               将hex颜色转为10进制后填入<br>                                               |
+|       slash_anycol       |                 生成横向的slash，颜色由set_slash_col定义                 |                                                                                                                           |
+|     slash_anycol_new     |            生成数个横向的slash，颜色由set_slash_col或val2定义            | val1不为\_时指定一次生成几个slash，填\_则按1记；<br> val2指定生成slash的颜色，为\_时使用set_slash_col<br>*回调型gimmick*  |
+| slash_anycol_close_time  |                    控制slash_anycol的收束时间，单位秒                    |                                                          默认为1                                                          |
+|       lr_slash_col       |                            调整lr_slash的颜色                            |                                               将hex颜色转为10进制后填入<br>                                               |
+|         lr_slash         |          生成数个位于两侧的slash，颜色由lr_slash_col或val2定义           |      val1指定一次生成几个slash，为\_则按1记；<br> val2指定生成slash的颜色，为\_则使用lr_slash_col<br>*回调型gimmick*      |
+|   lr_slash_close_time    |                      控制lr_slash的收束时间，单位秒                      |                                                          默认为1                                                          |
+|      lr_sides_blue       |                  从两侧生成蓝色的类astellion的sidething                  |                                                      *回调型gimmick*                                                      |
+|       lr_sides_red       |                  从两侧生成红色的类astellion的sidething                  |                                                      *回调型gimmick*                                                      |
+|    lr_sides_rev_blue     |              从画面外侧向内生成蓝色的类astellion的sidething              |                                                      *回调型gimmick*                                                      |
+|     lr_sides_rev_red     |              从画面外侧向内生成红色的类astellion的sidething              |                                                      *回调型gimmick*                                                      |
+|       sc_firework        |                      生成一个烟花，从底部升空后爆开                      | val1指定上升持续拍数，填\_则按1拍记，0或负数立即爆开；<br> val2指定爆开的Y坐标，为\_时随机取整数20~90<br>*回调型gimmick*  |
+|    sc_firework_color     |                         调整之后升空的烟花的颜色                         |    val1调整升空星星的颜色，val2调整爆开碎片的颜色，为\_则保持当前值；<br> 将hex颜色转为10进制后填入<br>*回调型gimmick*    |
+| chorus_greenleft_overlay |                  将轨道覆盖层与note皮肤变为allison风格                   |       val1为起始强度，val2为终止强度，取值范围0~1；<br> 终止值填\_则直接切换为val1；<br> 渐变的时长由duration列控制       |
+|      set_resolution      |                          调整房间渲染分辨率倍率                          | val2为倍率，取整后限制在1~8，填\_按1记；<br> 性能开销为倍率的平方（8倍即64倍像素），谱面结束时自动恢复<br>*回调型gimmick* |
+|        sg_endblip        |                       生成stargazer结尾的闭幕特效                        |                                                      *回调型gimmick*                                                      |
+|    sg_endblip_destroy    |                       销毁stargazer结尾的闭幕特效                        |                                                      *回调型gimmick*                                                      |
+
 
 ## 变速(SV)
 这里的变速指om或其它音游内传统的允许不等距的变速。<br>
