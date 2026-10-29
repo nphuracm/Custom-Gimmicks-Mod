@@ -1,0 +1,133 @@
+{
+  "source": "200bumpers.png",
+  "source_sha256": "8057bd2dc680087f371ce900398234b86b7716110df2e211dbca1931573144fa",
+  "authorship": "User-authored contact sheet; lossless programmatic slicing only.",
+  "frames": [
+    {
+      "file": "sp_lg_bumper_0.png",
+      "source_crop": [
+        2,
+        2,
+        54,
+        9
+      ],
+      "paste_at": [
+        24,
+        0
+      ],
+      "size": [
+        107,
+        7
+      ],
+      "origin": [
+        53,
+        3
+      ]
+    },
+    {
+      "file": "sp_lg_bumper_1.png",
+      "source_crop": [
+        1,
+        25,
+        108,
+        32
+      ],
+      "paste_at": [
+        0,
+        0
+      ],
+      "size": [
+        107,
+        7
+      ],
+      "origin": [
+        53,
+        3
+      ]
+    },
+    {
+      "file": "sp_lg_bumper_2.png",
+      "source_crop": [
+        64,
+        2,
+        117,
+        9
+      ],
+      "paste_at": [
+        31,
+        0
+      ],
+      "size": [
+        107,
+        7
+      ],
+      "origin": [
+        53,
+        3
+      ]
+    },
+    {
+      "file": "sp_lg_bumper_timing_0.png",
+      "source_crop": [
+        2,
+        16,
+        54,
+        23
+      ],
+      "paste_at": [
+        24,
+        0
+      ],
+      "size": [
+        107,
+        7
+      ],
+      "origin": [
+        53,
+        3
+      ]
+    },
+    {
+      "file": "sp_lg_bumper_timing_1.png",
+      "source_crop": [
+        1,
+        34,
+        108,
+        41
+      ],
+      "paste_at": [
+        0,
+        0
+      ],
+      "size": [
+        107,
+        7
+      ],
+      "origin": [
+        53,
+        3
+      ]
+    },
+    {
+      "file": "sp_lg_bumper_timing_2.png",
+      "source_crop": [
+        64,
+        16,
+        117,
+        23
+      ],
+      "paste_at": [
+        31,
+        0
+      ],
+      "size": [
+        107,
+        7
+      ],
+      "origin": [
+        53,
+        3
+      ]
+    }
+  ]
+}

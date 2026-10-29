@@ -1,0 +1,23 @@
+{
+  "source": "myearlybumper.png",
+  "source_sha256": "208c115e251f38346d9af6f3b0983d71e0398cad94c9b082f54163fdd6af83c4",
+  "authorship": "User-provided artwork; lossless crop without resampling.",
+  "crop": [
+    14,
+    0,
+    36,
+    7
+  ],
+  "size": [
+    22,
+    7
+  ],
+  "origin": [
+    11,
+    3
+  ],
+  "frames": [
+    "sp_lg_chip_mine_0.png",
+    "sp_lg_chip_mine_1.png"
+  ]
+}

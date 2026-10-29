@@ -23,7 +23,7 @@ restore = function()
 
 bake = function(a)
 {
-    var normal = [sp_note_chip_normal, sp_note_hold_normal, sp_note_bumper_normal, sp_note_bumper_timing_normal];
+    var normal = [cc.current_sg_skin[0], cc.current_sg_skin[2], cc.current_bp_skin[0], cc.current_bp_skin[1]];
     var allison = [sp_note_chip_allison, sp_note_hold_allison, sp_note_bumper_allison, sp_note_bumper_timing_allison];
     surf = surface_create(128, 64);
     if (!surface_exists(surf)) return false;
@@ -36,14 +36,14 @@ bake = function(a)
     {
         var w = sprite_get_width(normal[i]);
         var h = sprite_get_height(normal[i]);
-        draw_sprite_ext(normal[i], 0, 0, cy, 1, 1, 0, c_white, 1);
-        draw_sprite_ext(allison[i], 0, (w - sprite_get_width(allison[i])) / 2, cy + (h - sprite_get_height(allison[i])) / 2, 1, 1, 0, c_white, a);
+        draw_sprite_ext(normal[i], 0, sprite_get_xoffset(normal[i]), cy + sprite_get_yoffset(normal[i]), 1, 1, 0, c_white, 1);
+        draw_sprite_ext(allison[i], 0, sprite_get_xoffset(normal[i]), cy + sprite_get_yoffset(normal[i]), 1, 1, 0, c_white, a);
         array_push(out, sprite_create_from_surface(surf, 0, cy, w, h, false, false, sprite_get_xoffset(normal[i]), sprite_get_yoffset(normal[i])));
         cy += h;
     }
     surface_untarget();
     sprites = out;
-    obj_note_rendering.lane_sprites[0] = [out[0], out[0], out[1], out[0], sp_empty];
+    obj_note_rendering.lane_sprites[0] = [out[0], out[0], cc.current_sg_skin[2] == sp_lg_holdbody ? sp_lg_holdbody : out[1], out[0], sp_empty];
     obj_note_rendering.lane_sprites[1] = obj_note_rendering.lane_sprites[0];
     obj_note_rendering.lane_sprites[4] = [out[2], out[3], sp_empty];
     return true;
@@ -51,7 +51,12 @@ bake = function(a)
 
 var a = variable_instance_exists(cc, "mod_chorus_greenleft_overlay") ? clamp(cc.mod_chorus_greenleft_overlay, 0, 1) : 0;
 var mark = round(a * 255);
-if (mark == built) exit;
+var skin_changed = base_chip != cc.current_sg_skin[0] || base_hold != cc.current_sg_skin[2] || base_bumper != cc.current_bp_skin[0] || base_timing != cc.current_bp_skin[1];
+if (mark == built && !skin_changed) exit;
+base_chip = cc.current_sg_skin[0];
+base_hold = cc.current_sg_skin[2];
+base_bumper = cc.current_bp_skin[0];
+base_timing = cc.current_bp_skin[1];
 built = mark;
 release();
 

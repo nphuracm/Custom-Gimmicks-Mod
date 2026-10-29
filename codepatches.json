@@ -115,5 +115,215 @@
         "Type":3,
         "Function":"",
         "ExternalFile":"updateMod.gml"
+    },
+    {
+        "Entry": "gml_Object_cc_Draw_0",
+        "Type": 0,
+        "Find": "    draw_sprite(sp_gameplayoverlay2024, 0, 0, 0);\n    draw_sprite(sp_2024cc_score, 0, 259, 2);\n    draw_set_color(c_white);\n    draw_set_font(fnt_credits);\n    draw_set_halign(fa_center);\n    draw_text(290, 1, string(round(sdisp_accscore)));\n    var ex_offset = 0;\n    if (global.course_mode)\n    {\n        ex_offset = 16;\n        draw_sprite(sp_2024cc_score, 1, 259, 18);\n        draw_text(290, 17, string(round(global.current_course_score + sdisp_accscore)));\n    }\n    draw_set_font(global.default_font);\n    draw_sprite(sp_2024cc_score, 2, 259, 18 + ex_offset);\n    draw_text(295, 19 + ex_offset, string(round(sdisp_exscore)));\n",
+        "OnMiss": "Error",
+        "Value": "    if (cgm_legacy200_ui_enabled())\n        cgm_legacy200_draw_shell();\n    else\n    {\n    draw_sprite(sp_gameplayoverlay2024, 0, 0, 0);\n    draw_sprite(sp_2024cc_score, 0, 259, 2);\n    draw_set_color(c_white);\n    draw_set_font(fnt_credits);\n    draw_set_halign(fa_center);\n    draw_text(290, 1, string(round(sdisp_accscore)));\n    var ex_offset = 0;\n    if (global.course_mode)\n    {\n        ex_offset = 16;\n        draw_sprite(sp_2024cc_score, 1, 259, 18);\n        draw_text(290, 17, string(round(global.current_course_score + sdisp_accscore)));\n    }\n    draw_set_font(global.default_font);\n    draw_sprite(sp_2024cc_score, 2, 259, 18 + ex_offset);\n    draw_text(295, 19 + ex_offset, string(round(sdisp_exscore)));\n    }\n"
+    },
+    {
+        "Entry": "gml_Object_cc_Draw_0",
+        "Type": 1,
+        "Find": "if (room == scene_gameplay_opt && currentms >= 100727)",
+        "OnMiss": "Error",
+        "Value": "    if (cgm_legacy200_ui_enabled())\n        cgm_legacy200_draw_caption(song_alpha);\n    else\n    if (room == scene_gameplay_opt && currentms >= 100727)"
+    },
+    {
+        "Entry": "gml_Object_cc_Draw_0",
+        "Type": 0,
+        "Find": "    draw_set_halign(fa_right);\n    var diffsp;\n    switch (global.df_load)\n    {\n        case \"OPENING\":\n            diffsp = 0;\n            break;\n        case \"MIDDLE\":\n            diffsp = 1;\n            break;\n        case \"FINALE\":\n            diffsp = 2;\n            break;\n        case \"SHATTER\":\n            diffsp = 4;\n            break;\n        case \"ENCORE\":\n            diffsp = 3;\n            break;\n        case \"OPENING_STORY\":\n            diffsp = 0;\n            break;\n        case \"MIDDLE_STORY\":\n            diffsp = 1;\n            break;\n        case \"FINALE_STORY\":\n            diffsp = 2;\n            break;\n        case \"ENCORE_STORY\":\n            diffsp = 3;\n            break;\n        default:\n            diffsp = 4;\n            break;\n    }\n    if (global.df_load == \"ENCORE\" && struct_exists(global.song_list[global.song_id_last], \"enc_data\") && !struct_get_fallback(global.song_list[global.song_id_last].enc_data, \"hide_backstage\", false))\n    {\n        diffsp = 5;\n    }\n    var sdifsp;\n    switch (global.songdifficulty)\n    {\n        case \"9+\":\n            sdifsp = 19;\n            break;\n        case \"10+\":\n            sdifsp = 20;\n            break;\n        case \"11+\":\n            sdifsp = 21;\n            break;\n        case \"12+\":\n            sdifsp = 22;\n            break;\n        case \"13+\":\n            sdifsp = 23;\n            break;\n        case \"14+\":\n            sdifsp = 24;\n            break;\n        case \"15+\":\n            sdifsp = 25;\n            break;\n        case \"16+\":\n            sdifsp = 26;\n            break;\n        case \"17+\":\n            sdifsp = 27;\n            break;\n        case \"17+++\":\n            sdifsp = irandom(25);\n            break;\n        default:\n            sdifsp = global.songdifficulty;\n            break;\n    }\n    draw_set_color(c_white);\n    draw_sprite(sp_newdifficultyindicator, diffsp, 274, 167);\n    draw_sprite_ext(sp_newdifficultylevel, diffsp, 278, 171, 1, 1, 0, c_black, 0.3 * mod_uialpha);\n    draw_sprite_ext(sp_newdifficultylevel, diffsp, 277, 170, 1, 1, 0, c_white, mod_uialpha);\n    draw_sprite_ext(sp_newdifficultynumbers, sdifsp, 301, 170, 1, 1, 0, c_black, 0.3 * mod_uialpha);\n    draw_sprite_ext(sp_newdifficultynumbers, sdifsp, 300, 169, 1, 1, 0, c_white, mod_uialpha);\n",
+        "OnMiss": "Error",
+        "Value": "    if (cgm_legacy200_ui_enabled())\n        cgm_legacy200_draw_difficulty();\n    else\n    {\n    draw_set_halign(fa_right);\n    var diffsp;\n    switch (global.df_load)\n    {\n        case \"OPENING\":\n            diffsp = 0;\n            break;\n        case \"MIDDLE\":\n            diffsp = 1;\n            break;\n        case \"FINALE\":\n            diffsp = 2;\n            break;\n        case \"SHATTER\":\n            diffsp = 4;\n            break;\n        case \"ENCORE\":\n            diffsp = 3;\n            break;\n        case \"OPENING_STORY\":\n            diffsp = 0;\n            break;\n        case \"MIDDLE_STORY\":\n            diffsp = 1;\n            break;\n        case \"FINALE_STORY\":\n            diffsp = 2;\n            break;\n        case \"ENCORE_STORY\":\n            diffsp = 3;\n            break;\n        default:\n            diffsp = 4;\n            break;\n    }\n    if (global.df_load == \"ENCORE\" && struct_exists(global.song_list[global.song_id_last], \"enc_data\") && !struct_get_fallback(global.song_list[global.song_id_last].enc_data, \"hide_backstage\", false))\n    {\n        diffsp = 5;\n    }\n    var sdifsp;\n    switch (global.songdifficulty)\n    {\n        case \"9+\":\n            sdifsp = 19;\n            break;\n        case \"10+\":\n            sdifsp = 20;\n            break;\n        case \"11+\":\n            sdifsp = 21;\n            break;\n        case \"12+\":\n            sdifsp = 22;\n            break;\n        case \"13+\":\n            sdifsp = 23;\n            break;\n        case \"14+\":\n            sdifsp = 24;\n            break;\n        case \"15+\":\n            sdifsp = 25;\n            break;\n        case \"16+\":\n            sdifsp = 26;\n            break;\n        case \"17+\":\n            sdifsp = 27;\n            break;\n        case \"17+++\":\n            sdifsp = irandom(25);\n            break;\n        default:\n            sdifsp = global.songdifficulty;\n            break;\n    }\n    draw_set_color(c_white);\n    draw_sprite(sp_newdifficultyindicator, diffsp, 274, 167);\n    draw_sprite_ext(sp_newdifficultylevel, diffsp, 278, 171, 1, 1, 0, c_black, 0.3 * mod_uialpha);\n    draw_sprite_ext(sp_newdifficultylevel, diffsp, 277, 170, 1, 1, 0, c_white, mod_uialpha);\n    draw_sprite_ext(sp_newdifficultynumbers, sdifsp, 301, 170, 1, 1, 0, c_black, 0.3 * mod_uialpha);\n    draw_sprite_ext(sp_newdifficultynumbers, sdifsp, 300, 169, 1, 1, 0, c_white, mod_uialpha);\n    }\n"
+    },
+    {
+        "Entry": "gml_Object_obj_note_rendering_Draw_0",
+        "Type": 0,
+        "Find": "draw_sprite_ext(",
+        "OnMiss": "Error",
+        "Value": "cgm_legacy200_note_sprite("
+    },
+    {
+        "Entry": "gml_Object_obj_pressed_holds_Draw_0",
+        "Type": 0,
+        "Find": "draw_sprite_ext(",
+        "OnMiss": "Error",
+        "Value": "cgm_legacy200_hold_sprite("
+    },
+    {
+        "Entry": "gml_Object_obj_laneoverlay_Draw_0",
+        "Type": 0,
+        "Find": "draw_self();",
+        "OnMiss": "Error",
+        "Value": "cgm_legacy200_lane_self();"
+    },
+    {
+        "Entry": "gml_Object_o_holdnote_overlay_Draw_0",
+        "Type": 0,
+        "Find": "draw_self();",
+        "OnMiss": "Error",
+        "Value": "cgm_legacy200_receptor_self();"
+    },
+    {
+        "Entry": "gml_Object_o_combodisplay_Other_11",
+        "Type": 0,
+        "Find": "draw_text_o(171, y + 8, combo_text);",
+        "OnMiss": "Error",
+        "Value": "if (cgm_legacy200_ui_enabled())\n    cgm_legacy200_draw_sprite_text(sp_lg_combofont, combo_text, x + 8, y - 3, 0, draw_get_alpha());\nelse\n    draw_text_o(171, y + 8, combo_text);"
+    },
+    {
+        "Entry": "gml_Object_o_judgement_ingame_Other_10",
+        "Type": 0,
+        "Find": "draw_self();",
+        "OnMiss": "Error",
+        "Value": "if (cgm_legacy200_ui_enabled() && sprite_index == sp_judgements_2)\n    draw_sprite_ext(sp_judgements, image_index, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);\nelse\n    draw_self();"
+    },
+    {
+        "Entry": "gml_Object_o_pressindicator_Draw_0",
+        "Type": 0,
+        "OnMiss": "Error",
+        "Find": "image_alpha = 0.25 * global.op_lanebeamopacity * cc.mod_bgalph;",
+        "Value": "image_alpha = (cgm_legacy200_stock_beam() ? 1 : 0.25) * global.op_lanebeamopacity * cc.mod_bgalph;"
+    },
+    {
+        "Entry": "gml_Object_o_pressindicator_Draw_0",
+        "Type": 0,
+        "OnMiss": "Error",
+        "Find": "draw_self();",
+        "Value": "if (cgm_legacy200_stock_beam()) cgm_legacy200_press_draw(); else draw_self();"
+    },
+    {
+        "Entry": "gml_Object_o_pressindicator_Other_10",
+        "Type": 0,
+        "OnMiss": "Error",
+        "Find": "cc.CreateUiTween(0, 0.25, self, \"image_xscale\", EaseLinear, 1, 1);\ncc.CreateUiTween(0, 0.0625, self, \"image_yscale\", EaseOutCubic, 0, 1);",
+        "Value": "cgm_legacy200_press_on();"
+    },
+    {
+        "Entry": "gml_Object_o_pressindicator_Other_11",
+        "Type": 0,
+        "OnMiss": "Error",
+        "Find": "cc.CreateUiTween(0, 0.25, self, \"image_xscale\", EaseOutCubic, 1, 0);",
+        "Value": "cgm_legacy200_press_off();"
+    },
+    {
+        "Entry": "gml_Object_obj_noteIndicatorNew_Draw_0",
+        "Type": 0,
+        "OnMiss": "Error",
+        "Find": "var x1 = round(x - dx);\nvar x2 = round((x - 1) + dx);\nvar y1 = round(y - dy);\nvar y2 = round(y + dy);\ndraw_sprite_ext(sp_pixel, 0, x1, y1, (x2 - x1) + 1, 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x1, y2, (x2 - x1) + 1, 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x1, y1 + 1, 1, y2 - y1 - 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x2, y1 + 1, 1, y2 - y1 - 1, 0, image_blend, image_alpha);",
+        "Value": "if (cgm_legacy200_ui_enabled())\n{\n    cgm_legacy200_hit_draw(x, y, dx, dy, image_blend, image_alpha);\n}\nelse\n{\nvar x1 = round(x - dx);\nvar x2 = round((x - 1) + dx);\nvar y1 = round(y - dy);\nvar y2 = round(y + dy);\ndraw_sprite_ext(sp_pixel, 0, x1, y1, (x2 - x1) + 1, 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x1, y2, (x2 - x1) + 1, 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x1, y1 + 1, 1, y2 - y1 - 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x2, y1 + 1, 1, y2 - y1 - 1, 0, image_blend, image_alpha);\n}"
+    },
+    {
+        "Entry": "gml_Object_obj_noteIndicatorWideNew_Draw_0",
+        "Type": 0,
+        "OnMiss": "Error",
+        "Find": "var x1 = round(x - dx);\nvar x2 = round(x + dx);\nvar y1 = round(y - dy);\nvar y2 = round(y + dy);\ndraw_sprite_ext(sp_pixel, 0, x1, y1, (x2 - x1) + 1, 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x1, y2, (x2 - x1) + 1, 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x1, y1 + 1, 1, y2 - y1 - 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x2, y1 + 1, 1, y2 - y1 - 1, 0, image_blend, image_alpha);",
+        "Value": "if (cgm_legacy200_ui_enabled())\n{\n    cgm_legacy200_hit_draw(x, y, dx, dy, image_blend, image_alpha);\n}\nelse\n{\nvar x1 = round(x - dx);\nvar x2 = round(x + dx);\nvar y1 = round(y - dy);\nvar y2 = round(y + dy);\ndraw_sprite_ext(sp_pixel, 0, x1, y1, (x2 - x1) + 1, 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x1, y2, (x2 - x1) + 1, 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x1, y1 + 1, 1, y2 - y1 - 1, 0, image_blend, image_alpha);\ndraw_sprite_ext(sp_pixel, 0, x2, y1 + 1, 1, y2 - y1 - 1, 0, image_blend, image_alpha);\n}"
+    },
+    {
+        "Entry": "gml_Object_o_pressindicator_Create_0",
+        "Type": 3,
+        "Function": "",
+        "Value": "\ncgm_beam_native_depth = depth;\ncgm_beam_style = false;\ncgm_legacy200_beam_sync();",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_o_pressindicator_Step_0",
+        "Type": 3,
+        "Function": "",
+        "Value": "\ncgm_legacy200_beam_sync();",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_cc_Create_0",
+        "Type": 3,
+        "Function": "",
+        "Value": "\ninstance_create_depth(0, 0, -1001, o_cgm_legacy200_ui);",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_obj_noteIndicatorNew_Create_0",
+        "Type": 0,
+        "Find": "cc.CreateUiTween(0, 1/3, self, \"dx\", EaseOutExpo, 0, 15);\ncc.CreateUiTween(0, 1/3, self, \"dy\", EaseOutExpo, 0, 7);\ncc.CreateUiTween(0.16666666666666666, 1/3, self, \"image_alpha\", EaseOutExpo, 1, 0);",
+        "Value": "cgm_hit_age = 0;\ncgm_hit_wide = false;\ncgm_hit_native_color = image_blend;\ncgm_legacy200_hit_update(false);",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_obj_noteIndicatorNew_Step_0",
+        "Type": 2,
+        "Function": "",
+        "Value": "cgm_legacy200_hit_update(true);\n",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_obj_noteIndicatorWideNew_Create_0",
+        "Type": 0,
+        "Find": "cc.CreateUiTween(0, 1/3, self, \"dx\", EaseOutExpo, 0, 27);\ncc.CreateUiTween(0, 1/3, self, \"dy\", EaseOutExpo, 0, 7);\ncc.CreateUiTween(0.16666666666666666, 1/3, self, \"image_alpha\", EaseOutExpo, 1, 0);",
+        "Value": "cgm_hit_age = 0;\ncgm_hit_wide = true;\ncgm_hit_native_color = image_blend;\ncgm_legacy200_hit_update(false);",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_obj_noteIndicatorWideNew_Step_0",
+        "Type": 2,
+        "Function": "",
+        "Value": "cgm_legacy200_hit_update(true);\n",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_GlobalScript_handle_judgement",
+        "Type": 0,
+        "Find": "repeat ((6 / global.op_bgparticles) + 1)",
+        "Value": "var cgm_hit_spawn_index = 0;\n    repeat ((6 / global.op_bgparticles) + 1)",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_GlobalScript_handle_judgement",
+        "Type": 0,
+        "Find": "repeat ((3 / global.op_bgparticles) + 1)",
+        "Value": "var cgm_hit_spawn_index = 0;\n    repeat ((3 / global.op_bgparticles) + 1)",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_GlobalScript_handle_judgement",
+        "Type": 0,
+        "Find": "particle_system_add_particle(o_note_particlesystem.squares, arg0, arg1, (random(2) - 1) * arg2, (random(2) - 1) * arg3, 45, 0, 2, 2, 1, arg4, 16777215);",
+        "Value": "cgm_legacy200_hit_particle_add(o_note_particlesystem.squares, arg0, arg1, (random(2) - 1) * arg2, (random(2) - 1) * arg3, 45, 0, 2, 2, 1, arg4, 16777215, false, cgm_hit_spawn_index++);",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_GlobalScript_handle_judgement",
+        "Type": 0,
+        "Find": "particle_system_add_particle(o_note_particlesystem.diamonds, arg0, arg1, random(0.5) * arg2, random(0.5) * arg3, 0, 0, 1, 1, 0.8, irandom(3), color);",
+        "Value": "cgm_legacy200_hit_particle_add(o_note_particlesystem.diamonds, arg0, arg1, random(0.5) * arg2, random(0.5) * arg3, 0, 0, 1, 1, 0.8, irandom(3), color, true, cgm_hit_spawn_index++);",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_o_note_particlesystem_Draw_0",
+        "Type": 2,
+        "Function": "",
+        "Value": "if (cgm_legacy200_ui_enabled()) exit;\n",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_o_gameplay_jacketoverlay_Draw_0",
+        "Type": 2,
+        "Function": "",
+        "Value": "if (cgm_legacy200_background_enabled()) exit;\n",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_o_gameplay_jacketoverlay_plaudite_Draw_0",
+        "Type": 2,
+        "Function": "",
+        "Value": "if (cgm_legacy200_background_enabled()) exit;\n",
+        "OnMiss": "Error"
+    },
+    {
+        "Entry": "gml_Object_o_songgameplay_particlesystem_Draw_0",
+        "Type": 0,
+        "Find": "pt_diamonddust",
+        "Value": "cgm_legacy200_background_enabled() ? sp_lg_diamonddust : pt_diamonddust",
+        "OnMiss": "Error"
     }
 ]

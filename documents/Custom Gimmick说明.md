@@ -371,3 +371,8 @@ addVeloTween(time,timeEnd,stVelo,edVelo{,easing,step})
 **easing**：补间使用的缓动，缓动格式同vsm的，可以不写，默认为linear<br>
 **step**：补间的步长，可以不写，默认为32<br>
 
+
+
+## legacy200 presentation extension
+
+See `legacy200.md`: `uimode` (0 modern / 1 legacy200), `changeskin` skin 4, and independent `bgparticles200` (0 jacket mask / 1 plain particles). These controls are independent; skin 4 needs ENABLE_SKIN_CHANGE=true. No System Options entry is added.

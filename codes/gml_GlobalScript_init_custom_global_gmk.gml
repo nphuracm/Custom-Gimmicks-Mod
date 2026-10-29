@@ -52,3 +52,13 @@ UnlimitedAddGlobalMod("playspeed", 0,function(start,dur, v1, playspeed){
 UnlimitedAddGlobalMod("reset_scrollspeed",0,function(){
     cc.mod_scrollspeed=(global.op_note_speed / 5) + 1;
 });
+
+// Discrete presentation controls: set the destination at the event start.
+UnlimitedAddGlobalMod("uimode", 0, function(start, dur, v1, v2)
+{
+    cgm_set_ui_mode(v2 == cc.ORIGINAL_FROM ? v1 : v2);
+});
+UnlimitedAddGlobalMod("bgparticles200", 0, function(start, dur, v1, v2)
+{
+    cc.mod_bgparticles200 = (v2 == cc.ORIGINAL_FROM ? v1 : v2) >= 0.5 ? 1 : 0;
+});

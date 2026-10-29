@@ -24,19 +24,24 @@ function InitSkinChange(){
         [sp_note_chip_normal, sp_note_chip_normal, sp_note_hold_normal, sp_note_chip_normal, sp_note_chip_mine_normal],
         [sp_note_chip_stopmotion, sp_note_hold_start_stopmotion, sp_note_hold_stopmotion, sp_note_hold_end_stopmotion, sp_empty],
         [sp_note_chip_extendnova, sp_note_chip_extendnova, sp_note_hold_extendnova, sp_note_chip_extendnova, sp_note_chip_mine_normal],
-        [sp_note_chip_stargazers, sp_note_hold_start_stargazers, sp_note_hold_stargazers, sp_note_hold_end_stargazers, sp_empty]
+        [sp_note_chip_stargazers, sp_note_hold_start_stargazers, sp_note_hold_stargazers, sp_note_hold_end_stargazers, sp_empty],
+        [sp_lg_chip, sp_lg_chip, sp_lg_holdbody, sp_lg_chip, sp_lg_chip_mine]
     ]
     bumperSkins=[
         [sp_note_bumper_normal, sp_note_bumper_timing_normal, sp_note_bumper_mine_normal],
         [sp_note_bumper_stopmotion, sp_empty, sp_empty],
         [sp_note_bumper_extendnova, sp_note_bumper_timing_normal, sp_note_bumper_mine_normal],
-        [sp_note_bumper_stargazers, sp_note_bumper_timing_stargazers, sp_empty]
+        [sp_note_bumper_stargazers, sp_note_bumper_timing_stargazers, sp_empty],
+        [sp_lg_bumper, sp_lg_bumper_timing, sp_lg_bumper_mine]
     ]
     cc.current_sg_skin=singleSkins[0]
     cc.current_bp_skin=bumperSkins[0]
     if (!cc.ENABLE_SKIN_CHANGE)
         exit;
     addExtraMod("changeskin", 0, function(start,dur,v1,skinID){
+        if (skinID == cc.ORIGINAL_FROM) skinID = v1;
+        skinID = round(skinID);
+        if (skinID < 0 || skinID >= array_length(obj_custom_gimmick.singleSkins)) return;
         for (var lane=0;lane<7;lane++)
         {
             if (lane<4)

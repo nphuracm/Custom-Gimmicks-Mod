@@ -1,3 +1,6 @@
+mod_uimode = 0;
+mod_bgparticles200 = 0;
+cgm_applied_uimode = false;
 chartPath=get_chart_path_from_chartid(global.ch_load);
 var settings=[
     ["JACKET_MANAGE_MODE", "plaudite"],

@@ -1,1 +1,1 @@
-draw_sprite_ext(pt_diamonddust,imgidx,x,y,1,1,0,image_blend,image_alpha*cc.mod_particle_alpha)
+draw_sprite_ext(cgm_legacy200_background_enabled() ? sp_lg_diamonddust : pt_diamonddust,imgidx,x,y,1,1,0,image_blend,image_alpha*cc.mod_particle_alpha)

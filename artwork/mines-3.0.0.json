@@ -1,0 +1,64 @@
+{
+  "version": "3.0.0",
+  "sprite": "sp_notetypesnew",
+  "note": "Original game pixels, lossless crops. These are bumper mines only; chip artwork is recorded separately in myearlybumper-slices.json.",
+  "frames": [
+    {
+      "file": "sp_lg_bumper_mine_0.png",
+      "source": "mines-3.0.0/sp_notetypesnew_9.png",
+      "source_sha256": "8f9df71c46f0b1098a46cf583eaa36e6067493ca72449a2c741fa2d0b81edc03",
+      "crop": [
+        14,
+        0,
+        59,
+        7
+      ],
+      "origin": [
+        22,
+        3
+      ],
+      "size": [
+        45,
+        7
+      ]
+    },
+    {
+      "file": "sp_lg_bumper_mine_1.png",
+      "source": "mines-3.0.0/sp_notetypesnew_10.png",
+      "source_sha256": "52c0fb63e0c7b4820f2fba3fe99e98ba8d3cb5b0989b1dc692085d08cf61cb0f",
+      "crop": [
+        37,
+        0,
+        82,
+        7
+      ],
+      "origin": [
+        22,
+        3
+      ],
+      "size": [
+        45,
+        7
+      ]
+    },
+    {
+      "file": "sp_lg_bumper_mine_2.png",
+      "source": "mines-3.0.0/sp_notetypesnew_11.png",
+      "source_sha256": "51858d8e7e423fac60735bc867348405f7add714bc0b8359456641196c1fc770",
+      "crop": [
+        60,
+        0,
+        105,
+        7
+      ],
+      "origin": [
+        22,
+        3
+      ],
+      "size": [
+        45,
+        7
+      ]
+    }
+  ]
+}

@@ -1,3 +1,9 @@
+## legacy200 contribution
+
+- Independent `uimode` and `bgparticles200` chart controls; regular `changeskin` skin 4.
+- Instant reversible UI/feedback switching without a System Options entry.
+- Selected-base-skin Allison transitions. See `documents/legacy200.md`.
+
 # 更新日志
 ---
 ### v1.6.2
